@@ -56,7 +56,8 @@ export default {
               //得到的status為200就是登錄成功了的狀態碼
             //   this.$message({message: res.data.meta.msg,type:'success'})
             this.$message.success(res.data.meta.msg)
-            // 保存token sessionStorage
+            // 保存token sessionStorage 
+            // 鍵值對:(鍵:'token'這個可以隨便取名, 值:res.data.data.token是後台給的,可以在res.data.data裡看到)
             window.sessionStorage.setItem('token',res.data.data.token)
             // 去首頁 用 編程式導航
             this.$router.push('/')
