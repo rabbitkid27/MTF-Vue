@@ -1,10 +1,12 @@
 <template>
-  <router-view></router-view>
+    <div>
+        <el-button  ></el-button>
+    </div>
 </template>
 
 <script>
 export default {
-  
+    
 }
 </script>
 
