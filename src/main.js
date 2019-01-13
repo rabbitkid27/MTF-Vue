@@ -18,8 +18,7 @@ Vue.use(ElementUI);
 // 導入自己抽取的路由 router
 import router from './lib/router'
 
-Vue.config.productionTip = false;
-
+// Vue.config.productionTip = false;
 
 new Vue({
   router,

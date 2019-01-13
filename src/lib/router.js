@@ -9,6 +9,9 @@ Vue.use(VueRouter);
 // 導入路由管理的組件
 import login from '../components/login.vue';
 import main from '../components/main.vue';
+import users from '../components/users.vue'
+import roles from '../components/roles.vue'
+import rights from '../components/rights.vue'
 
 
 // 寫規則
@@ -16,11 +19,23 @@ let routes = [
     {
          path: '/login', 
          component: login 
-        },
+    },
     { 
         path: '/', 
         component: main 
-    }
+    },
+    {
+      path:'/users',
+      component: users
+    },
+    {
+      path:'/roles',
+      component: roles
+    },
+    {
+      path:'/rights',
+      component: rights
+    },
   ]
   
 //   實例化對象

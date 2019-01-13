@@ -29,14 +29,10 @@ export default {
       },
       // 表单验证规则
       rules: {
+           // required :必须 ;message: 提示信息 ;trigger: 触发时机;min:最短;max:最常
         username: [
           { required: true, message: '請输入用戶名', trigger: 'change' },
-          {
-            min: 3,
-            max: 10,
-            message: '长度在 3 到 10 个字符',
-            trigger: 'change'
-          }
+          {min: 3,max: 10, message: '长度在 3 到 10 个字符',trigger: 'change' }
         ],
         password: [
           { required: true, message: '請輸入密碼', trigger: 'change' },
@@ -58,10 +54,12 @@ export default {
               this.$message.error(res.data.meta.msg)
             } else if (res.data.meta.status === 200) {
               //得到的status為200就是登錄成功了的狀態碼
-              this.$message({
-                message: res.data.meta.msg,
-                type: 'success'
-              })
+            //   this.$message({message: res.data.meta.msg,type:'success'})
+            this.$message.success(res.data.meta.msg)
+            // 保存token sessionStorage
+            window.sessionStorage.setItem('token',res.data.data.token)
+            // 去首頁 用 編程式導航
+            this.$router.push('/')
             }
           })
         } else {

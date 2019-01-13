@@ -11,3 +11,9 @@ export default {
   Vue.prototype.$axios=axios;
     }
 }
+
+// let vueAxios = {}
+// vueAxios.install = function(Vue){
+//   Vue.prototype.$axios = axios;
+// }
+// export default vueAxios;
