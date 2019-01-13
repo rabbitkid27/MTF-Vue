@@ -1,7 +1,12 @@
 <template>
     <div>
         <el-button @click="logout" type="success">退出</el-button>
+        <div class="right-auto">
+            <!-- 出口 -->
+            <router-view></router-view>
+        </div>
     </div>
+    
 </template>
 
 <script>

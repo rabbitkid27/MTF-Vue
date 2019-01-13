@@ -20,22 +20,29 @@ let routes = [
          path: '/login', 
          component: login 
     },
+    {
+      path: '/', 
+      redirect:'/main'
+    },
     { 
-        path: '/', 
-        component: main 
+        path: '/main', 
+        component: main,
+        children:[
+          {
+            path:'/users',
+            component: users
+          },
+          {
+            path:'/roles',
+            component: roles
+          },
+          {
+            path:'/rights',
+            component: rights
+          },
+        ]
     },
-    {
-      path:'/users',
-      component: users
-    },
-    {
-      path:'/roles',
-      component: roles
-    },
-    {
-      path:'/rights',
-      component: rights
-    },
+    
   ]
   
 //   實例化對象
