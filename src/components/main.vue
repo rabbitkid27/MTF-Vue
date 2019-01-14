@@ -1,5 +1,6 @@
 <template>
     <div class="main-container">
+        <myBreadcrumb LV2="我就是LV2" LV3="尼瑪我就是LV3"></myBreadcrumb>
         <el-container>
             <el-header>
                 <el-row>
@@ -35,12 +36,11 @@
                         </el-submenu>
                     </el-menu>
                 </el-aside>
-                <el-main>我是主體內容 </el-main>
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
             </el-container>
         </el-container>
-        <!-- <div class="right-auto"> -->
-            <!-- <router-view></router-view> -->
-        <!-- </div> -->
     </div>
 </template>
 
@@ -137,8 +137,9 @@ export default {
   .el-main {
     background-color: #e9eef3;
     color: #333;
-    text-align: center;
-    line-height: 160px;
+    padding-top: 0;
+    // text-align: center;
+    // line-height: 160px;
   }
   //設置折疊菜單 樣式 突出的地方
   .el-submenu__title {

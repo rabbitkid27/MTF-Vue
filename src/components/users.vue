@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <el-button type="info" round>帥哥 嗨~</el-button>
+    <div class="user-container">
+        <!-- 顶部面包屑 -->
+        
     </div>
 </template>
 
@@ -13,3 +14,4 @@ export default {
 <style>
 
 </style>
+// myBreadcrumb

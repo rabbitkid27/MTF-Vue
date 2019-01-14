@@ -29,15 +29,15 @@ let routes = [
         component: main,
         children:[
           {
-            path:'/users',
+            path:'users',
             component: users
           },
           {
-            path:'/roles',
+            path:'roles',
             component: roles
           },
           {
-            path:'/rights',
+            path:'rights',
             component: rights
           },
         ]

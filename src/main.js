@@ -20,6 +20,12 @@ import router from './lib/router'
 
 // Vue.config.productionTip = false;
 
+// 導入自己抽取的麵包屑 - 為了能夠在所有組件中使用 直接全局註冊麵包屑導航
+import myBreadcrumb from './components/myBreadcrumb.vue';
+// 全局註冊麵包屑組件
+Vue.component('myBreadcrumb',myBreadcrumb);
+
+
 new Vue({
   // 挂载到 最顶级的Vue实例上
   router,
