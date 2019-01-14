@@ -89,12 +89,7 @@ export default {
   created() {
     //   不明白
     this.$axios
-      .get("menus", {
-        headers: {
-          Authorization: window.sessionStorage.getItem("token")
-        }
-      })
-      .then(res => {
+      .get("menus").then(res => {
         // console.log(res);    
         this.menuList = res.data.data;
       });
