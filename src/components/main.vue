@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <myBreadcrumb LV2="我就是LV2" LV3="尼瑪我就是LV3"></myBreadcrumb>
+        
         <el-container>
             <el-header>
                 <el-row>
@@ -20,7 +20,7 @@
                 </el-row>
             </el-header>
             <el-container>
-                <el-aside width="205px">
+                <el-aside width="201px">
                     <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router>
                         <!-- 大循環  這裡的index是當前菜單的索引值,要打開哪個,所以給累加值-->
                         <el-submenu v-for="(item, index) in menuList" :key="item.id" :index="item.order+''">
@@ -37,6 +37,7 @@
                     </el-menu>
                 </el-aside>
                 <el-main>
+                    <!-- 渲染嵌套路由的組件 -->
                     <router-view></router-view>
                 </el-main>
             </el-container>
@@ -46,11 +47,11 @@
 
 <script>
 export default {
-    data(){
-        return{
-            menuList:[]
-        };
-    },
+  data() {
+    return {
+      menuList: []
+    }
+  },
   // 聲明生命週期函數,這個beforeCreate用來檢測 用戶來到這個頁面的時候,有沒有登錄過!
   //   beforeCreate() {
   //     let token = window.sessionStorage.getItem('token')
@@ -63,41 +64,41 @@ export default {
   // 這個logout是用戶點擊了退出按鈕的事件!
   methods: {
     logout() {
-         this.$confirm('你真的要退出吗?o(╥﹏╥)o', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-            // 清除登錄狀態,token
-        window.sessionStorage.removeItem('token')
-      // 編程式導航
-      this.$router.push('login')
-    //   成功的
+      this.$confirm('你真的要退出吗?o(╥﹏╥)o', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          // 清除登錄狀態,token
+          window.sessionStorage.removeItem('token')
+          // 編程式導航
+          this.$router.push('login')
+          //   成功的
           this.$message({
             type: 'success',
             message: '删除成功!'
-          });
-        }).catch(() => {
-            // 失敗的
+          })
+        })
+        .catch(() => {
+          // 失敗的
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });          
-        });
+          })
+        })
     }
   },
   created() {
-    //   不明白
-    this.$axios
-      .get("menus").then(res => {
-        // console.log(res);    
-        this.menuList = res.data.data;
-      });
+    this.$axios.get('menus').then(res => {
+      // console.log(res);
+      this.menuList = res.data.data
+    })
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 // <style lang="scss" scoped>
 //預處理器  集合  父選擇器[css作用域]
 //css作用域:使用一个大的选择器,把一些后代选择器的范围约束在其内部.样式限定在一个区域内.
@@ -141,9 +142,10 @@ export default {
     // text-align: center;
     // line-height: 160px;
   }
-  //設置折疊菜單 樣式 突出的地方
+
+  // 设置折叠菜单 样式
   .el-submenu__title {
-      text-align: left;
+    text-align: left;
   }
 }
 </style>

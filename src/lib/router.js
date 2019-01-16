@@ -17,17 +17,13 @@ import rights from '../components/rights.vue'
 // 寫規則
 let routes = [
     {
-         path: '/login', 
-         component: login 
+      path: '/login', 
+      component: login 
     },
     {
-      path: '/', 
-      redirect:'/main'
-    },
-    { 
-        path: '/main', 
-        component: main,
-        children:[
+      path: '/',
+      component: main,
+      children:[
           {
             path:'users',
             component: users
@@ -56,7 +52,7 @@ router.beforeEach((to, from, next) => {
   // console.log(to);
   // console.log(from);
    // next 方法如果不执行 就不会跳转
-  next(); 
+  // next(); //這個next要不要都可以的,不會影響...
   if(to.path==='/login'){
     next();
       // 登录页 不需要判断

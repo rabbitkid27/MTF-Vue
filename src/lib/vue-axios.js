@@ -53,5 +53,11 @@ export default {
 // let vueAxios = {}
 // vueAxios.install = function(Vue){
 //   Vue.prototype.$axios = axios;
+//   // this.$axios.get()
+//   // this.$axios.post()
+//   // Vue.prototype.$myMethod = function (methodOptions) {
+//   //   // 逻辑...
+//   // }
+//   // this.$myMethod()
 // }
 // export default vueAxios;

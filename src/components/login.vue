@@ -52,15 +52,15 @@ export default {
             if (res.data.meta.status === 400) {
               //得到的status為400就是登錄錯誤了的狀態碼
               // this.$message.error(res.data.meta.msg)
-            } else if (res.data.meta.status === 200) {
+            } else if (res.data.meta.status == 200) {
               //得到的status為200就是登錄成功了的狀態碼
             //   this.$message({message: res.data.meta.msg,type:'success'}) 和下面一樣
             // this.$message.success(res.data.meta.msg)
             // 保存token sessionStorage 
             // 鍵值對:(鍵:'token'這個可以隨便取名, 值:res.data.data.token是後台給的,可以在res.data.data裡看到)
-            window.sessionStorage.setItem('token',res.data.data.token)
+            window.sessionStorage.setItem("token",res.data.data.token)
             // 去首頁 用 編程式導航
-            this.$router.push('/')
+            this.$router.push("/")
             }
           })
         } else {

@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import App from './App.vue';
+import Vue from 'vue'; // let Vue = require('xxx');
+import App from './App.vue'; 
 
 // 引入全局樣式
 import './assets/base.css';
@@ -16,7 +16,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);  //Vue的原型上 增加了很多的方法
 
 // 導入自己抽取的路由 router
-import router from './lib/router'
+import router from './lib/router';  // let router =  require('./lib/router);
+// 在router.js裡面有一句將router暴露出去的代碼:讓外部訪問 export default router;所以這裡才能使用.
+
 
 // Vue.config.productionTip = false;
 
@@ -25,7 +27,7 @@ import myBreadcrumb from './components/myBreadcrumb.vue';
 // 全局註冊麵包屑組件
 Vue.component('myBreadcrumb',myBreadcrumb);
 
-
+//Vue 本來是函數,當在這裡被new後就變成了構造函數了
 new Vue({
   // 挂载到 最顶级的Vue实例上
   router,
