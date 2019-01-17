@@ -12,11 +12,13 @@ import main from '../components/main.vue';
 import users from '../components/users.vue'
 import roles from '../components/roles.vue'
 import rights from '../components/rights.vue'
+import goods from '../components/goods.vue'
+import categories from '../components/categories.vue'
 
 
 // 寫規則
 let routes = [
-    {
+    {//path路径  component组件
       path: '/login', 
       component: login 
     },
@@ -35,6 +37,14 @@ let routes = [
           {
             path:'rights',
             component: rights
+          },
+          {
+            path:'goods',
+            component: goods
+          },
+          {
+            path:'categories',
+            component: categories
           },
         ]
     },

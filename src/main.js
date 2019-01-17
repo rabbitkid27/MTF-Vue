@@ -26,6 +26,16 @@ import router from './lib/router';  // let router =  require('./lib/router);
 import myBreadcrumb from './components/myBreadcrumb.vue';
 // 全局註冊麵包屑組件
 Vue.component('myBreadcrumb',myBreadcrumb);
+//---------------------分割线------------------------
+
+// 導入時間處理庫 :moment.js
+import moment from 'moment';
+
+//過濾器  將時間戳變成有格式的時間
+Vue.filter('afterTime',(value)=>{
+  return moment(value).format('YYYY年MM月DD日 HH:mm:ss')
+})
+
 
 //Vue 本來是函數,當在這裡被new後就變成了構造函數了
 new Vue({

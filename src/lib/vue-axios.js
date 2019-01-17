@@ -56,8 +56,7 @@ export default {
 //   // this.$axios.get()
 //   // this.$axios.post()
 //   // Vue.prototype.$myMethod = function (methodOptions) {
-//   //   // 逻辑...
+//   //   // 逻辑代码...
 //   // }
-//   // this.$myMethod()
-// }
+//   // this.$myMethod()}
 // export default vueAxios;

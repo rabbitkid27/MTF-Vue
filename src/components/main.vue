@@ -5,7 +5,7 @@
             <el-header>
                 <el-row>
                     <el-col :span="4">
-                        <div class="grid-content bg-purple">
+                        <div class="grid-content">
                             <img src="../assets/logo.png" alt>
                         </div>
                     </el-col>
@@ -13,7 +13,7 @@
                         <div class="grid-content bg-purple-light">電商後台管理系統</div>
                     </el-col>
                     <el-col :span="2">
-                        <div class="grid-content bg-purple">
+                        <div class="grid-content">
                             <el-button @click="logout" type="success">退出</el-button>
                         </div>
                     </el-col>

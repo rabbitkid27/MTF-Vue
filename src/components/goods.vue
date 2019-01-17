@@ -29,23 +29,18 @@
         <el-row>
             <el-col :span="24">
                 <!-- type="index" 添加索引,prop=渲染值, -->
-                <el-table :data="userList" style="width: 100%" border>
-                    <el-table-column label="#" width="30" type="index"></el-table-column>
-                    <el-table-column prop="username" label="姓名" width="180"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="300"></el-table-column>
-                    <el-table-column prop="mobile" label="电话" width="300"></el-table-column>
-                    <el-table-column label="用户状态" width="80">
-                        <template slot-scope="scope">
-                            <!-- 这里不懂,要提问 -->
-                            <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949">
-                            </el-switch>
-                        </template>
+                <el-table :data="goodsList" style="width: 100%" border>
+                    <el-table-column label="#" width="40" type="index"></el-table-column>
+                    <el-table-column prop="goods_name" label="商品名称" width="500"></el-table-column>
+                    <el-table-column prop="goods_price" label="商品价格(元)" width="100"></el-table-column>
+                    <el-table-column prop="goods_weight" label="商品重量" width="70"></el-table-column>
+                    <el-table-column prop="add_time" label="创建时间" width="250">
+                        <template slot-scope="prop">{{prop.row.add_time | afterTime}}</template>
                     </el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
                             <el-button size="mini" icon="el-icon-edit" type="primary" plain></el-button>
                             <el-button size="mini" icon="el-icon-delete" type="danger" plain></el-button>
-                            <el-button size="mini" icon="el-icon-check" type="warning" plain></el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -54,7 +49,7 @@
         <!-- 底部的分页 -->
         <el-row>
             <el-col :span="24">
-                <el-pagination :current-page="pageData.pagenum" :page-sizes="[2, 4, 6, 8, 10]" :page-size="pageData.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+                <el-pagination :current-page="pageData.pagenum" :page-sizes="[2, 4, 6, 8, 10]" :page-size="pageData.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="currentchange" @size-change="sizechange">
                 </el-pagination>
             </el-col>
         </el-row>
@@ -65,33 +60,46 @@
 export default {
   data() {
     return {
-      LV2: '用户管理',
-      LV3: '用户列表',
+      LV2: '商品管理',
+      LV3: '商品列表',
       pageData: {
         //   查询参数
         query: '',
         //   页码
         pagenum: 1,
         // 页容量
-        pagesize: 10
+        pagesize: 6
       },
       //   总页数
       total: 0,
       //   用户的数据
-      userList: []
+      goodsList: []
     }
   },
-async created() {
-    //   get的发送方式的其中一个写法需要写 , {params:??}
-    // 第一种: 原始写法: `users?pagenum=${this.pageData.pagenum}&pagesize=${this.pageData.pagesize}`
-    // 第二种:  this.$axios.get('users', { params: this.pageData }).then(res => {
-        // 第三种: 同步执行,方便快捷:↓
-        let res = await this.$axios.get('users',{
-            params:this.pageData
-        });
+  methods: {
+      //封裝 獲取渲染數據的函數為getGoods 要用的時候就調用方法即可  
+    async getGoods() {
+      let res = await this.$axios.get('goods', {
+        params: this.pageData
+      })
       console.log(res)
-      this.userList = res.data.data.users;
-      this.total = res.data.data.total;
+      this.goodsList = res.data.data.goods
+      this.total = res.data.data.total
+    },
+    // 分頁實現 讀取每一頁跳轉的功能 需要傳入頁碼pagenum
+    currentchange(pagenum){
+        this.pageData.pagenum = pagenum;
+        this.getGoods();
+    },
+    // 每页条数 改變的功能 根據page-sizes的數字而變
+    sizechange(pagesize){
+        this.pageData.pagesize=pagesize;  // 修改頁容量的功能
+        this.pageData.pagesize=1;  //每次改變了頁容量後,需要重置跳回第一頁
+        this.getGoods();
+    }
+  },
+  async created() {
+    this.getGoods()
   }
 }
 </script>
