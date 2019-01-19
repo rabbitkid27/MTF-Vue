@@ -10,9 +10,18 @@
         </el-row>
         <!-- 操纵框 -->
         <el-row>
-            <el-col :span="24">
+            <el-col :span="8">
                 <div class="grid-content bg-purple">
-                    <el-button type="success" plain>添加分類</el-button>
+                    <el-input placeholder="请输入内容" v-model="pageData.query">
+                        <template slot="append">
+                            <i class="el-icon-search"></i>
+                        </template>
+                    </el-input>
+                </div>
+            </el-col>
+            <el-col :span="16">
+                <div class="grid-content bg-purple">
+                    <el-button type="success" plain>添加用户</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -20,19 +29,13 @@
         <el-row>
             <el-col :span="24">
                 <!-- type="index" 添加索引,prop=渲染值, -->
-                <el-table :data="categoriesList" style="width: 100%" border>
-                    <el-table-column prop="cat_name" label="分類名稱" width="330"></el-table-column>
-                    <el-table-column prop="cat_level" label="級別" width="100">
-                        <template slot-scope="prop">
-                            <span v-if="prop.row.cat_level===0">壹級</span>
-                            <span v-if="prop.row.cat_level===1">貳級</span>
-                            <span v-if="prop.row.cat_level===2">叁級</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="cat_deleted" label="是否有效" width="180">
-                        <template slot-scope="prop">
-                            {{prop.row.cat_deleted?'有效':'無效'}}
-                        </template>
+                <el-table :data="goodsList" style="width: 100%" border>
+                    <el-table-column label="#" width="40" type="index"></el-table-column>
+                    <el-table-column prop="goods_name" label="商品名称" width="500"></el-table-column>
+                    <el-table-column prop="goods_price" label="商品价格(元)" width="100"></el-table-column>
+                    <el-table-column prop="goods_weight" label="商品重量" width="70"></el-table-column>
+                    <el-table-column prop="add_time" label="创建时间" width="250">
+                        <template slot-scope="prop">{{prop.row.add_time | afterTime}}</template>
                     </el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
@@ -58,9 +61,10 @@ export default {
   data() {
     return {
       LV2: '商品管理',
-      LV3: '商品分類',
+      LV3: '商品列表',
       pageData: {
-        type: 3,
+        //   查询参数
+        query: '',
         //   页码
         pagenum: 1,
         // 页容量
@@ -68,35 +72,34 @@ export default {
       },
       //   总页数
       total: 0,
-      //   分類的数据
-      categoriesList: []
+      //   用户的数据
+      goodsList: []
     }
   },
   methods: {
-    //封裝 獲取渲染數據的函數為getCategories 要用的時候就調用方法即可
-    async getCategories() {
-      let res = await this.$axios.get('categories', {
+      //封裝 獲取渲染數據的函數為getGoods 要用的時候就調用方法即可  
+    async getGoods() {
+      let res = await this.$axios.get('goods', {
         params: this.pageData
       })
       console.log(res)
-      //   打印出來的result 是一個Array↓
-      this.categoriesList = res.data.data.result
+      this.goodsList = res.data.data.goods
       this.total = res.data.data.total
     },
     // 分頁實現 讀取每一頁跳轉的功能 需要傳入頁碼pagenum
-    currentchange(pagenum) {
-      this.pageData.pagenum = pagenum
-      this.getCategories()
+    currentchange(pagenum){
+        this.pageData.pagenum = pagenum;
+        this.getGoods();
     },
     // 每页条数 改變的功能 根據page-sizes的數字而變
-    sizechange(pagesize) {
-      this.pageData.pagesize = pagesize // 修改頁容量的功能
-      this.pageData.pagesize = 1 //每次改變了頁容量後,需要重置跳回第一頁
-      this.getCategories()
+    sizechange(pagesize){
+        this.pageData.pagesize=pagesize;  // 修改頁容量的功能
+        this.pageData.pagesize=1;  //每次改變了頁容量後,需要重置跳回第一頁
+        this.getGoods();
     }
   },
   async created() {
-    this.getCategories()
+    this.getGoods()
   }
 }
 </script>

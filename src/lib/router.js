@@ -14,6 +14,9 @@ import roles from '../components/roles.vue'
 import rights from '../components/rights.vue'
 import goods from '../components/goods.vue'
 import categories from '../components/categories.vue'
+import reports from '../components/reports.vue'
+import params from '../components/params.vue'
+import orders from '../components/orders.vue'
 
 
 // 寫規則
@@ -45,6 +48,18 @@ let routes = [
           {
             path:'categories',
             component: categories
+          },
+          {
+            path:'reports',
+            component: reports
+          },
+          {
+            path:'params',
+            component: params
+          },
+          {
+            path:'orders',
+            component: orders
           },
         ]
     },

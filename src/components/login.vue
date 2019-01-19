@@ -59,7 +59,7 @@ export default {
             // 保存token sessionStorage 
             // 鍵值對:(鍵:'token'這個可以隨便取名, 值:res.data.data.token是後台給的,可以在res.data.data裡看到)
             window.sessionStorage.setItem("token",res.data.data.token)
-            // 去首頁 用 編程式導航
+            // 去首頁 用 編程式導航 最后才能使用push去登录!注意先后顺序 先设置token再跳转!!!
             this.$router.push("/")
             }
           })
