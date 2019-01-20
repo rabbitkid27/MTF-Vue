@@ -14,7 +14,7 @@
                 <div class="grid-content bg-purple">
                     <el-input placeholder="请输入内容" v-model="pageData.query">
                         <template slot="append">
-                            <i class="el-icon-search"></i>
+                            <i @click="searchUser" class="el-icon-search"></i>
                         </template>
                     </el-input>
                 </div>
@@ -63,6 +63,7 @@
 
 <script>
 export default {
+  name: 'users',
   data() {
     return {
       LV2: '用户管理',
@@ -81,17 +82,31 @@ export default {
       userList: []
     }
   },
-async created() {
+  methods: {
+    async getUsers() {
+      let res = await this.$axios.get('users', {
+        params: this.pageData
+      })
+      // console.log(res) //賦值
+      this.userList = res.data.data.users
+      this.total = res.data.data.total
+    },
+    // 查詢用戶數據
+    searchUser(){
+        this.getUsers();
+    },
+  },
+  async created() {
     //   get的发送方式的其中一个写法需要写 , {params:??}
     // 第一种: 原始写法: `users?pagenum=${this.pageData.pagenum}&pagesize=${this.pageData.pagesize}`
     // 第二种:  this.$axios.get('users', { params: this.pageData }).then(res => {
-        // 第三种: 同步执行,方便快捷:↓
-        let res = await this.$axios.get('users',{
-            params:this.pageData
-        });
-      console.log(res)
-      this.userList = res.data.data.users;
-      this.total = res.data.data.total;
+    // 第三种: 同步执行,方便快捷:↓
+    let res = await this.$axios.get('users', {
+      params: this.pageData
+    })
+    // console.log(res) //賦值
+    this.userList = res.data.data.users
+    this.total = res.data.data.total
   }
 }
 </script>

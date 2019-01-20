@@ -21,7 +21,8 @@
             <el-col :span="24">
                 <!-- type="index" 添加索引,prop=渲染值, -->
                 <el-table :data="categoriesList" style="width: 100%" border>
-                    <el-table-column prop="cat_name" label="分類名稱" width="330"></el-table-column>
+                    <!-- 树形table -->
+                    <el-tree-grid prop="cat_name" label="分类名称" treeKey="cat_id" parentKey="cat_pid" levelKey="cat_level" childKey="children" :indentSize="30"></el-tree-grid>
                     <el-table-column prop="cat_level" label="級別" width="100">
                         <template slot-scope="prop">
                             <span v-if="prop.row.cat_level===0">壹級</span>
@@ -54,7 +55,15 @@
 </template>
 
 <script>
+import ElTreeGrid from 'element-tree-grid'
+// var ElTreeGrid = require('element-tree-grid');
+// Vue.component(ElTreeGrid.name,ElTreeGrid);
 export default {
+  name: 'categories',
+  components: {
+    // 注册element-tree-grid组件
+    ElTreeGrid
+  },
   data() {
     return {
       LV2: '商品管理',
